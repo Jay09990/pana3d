@@ -90,6 +90,10 @@ export default function PanoramaViewer() {
     }
   };
 
+  const handleDeleteHotspot = (hotspotId: string) => {
+    setHotspots(prev => prev.filter(h => h.id !== hotspotId));
+  };
+
   if (images.length === 0) {
     return (
       <main className="relative flex flex-col justify-between w-full min-h-screen bg-zinc-950 overflow-hidden select-none text-zinc-100">
@@ -160,6 +164,7 @@ export default function PanoramaViewer() {
               isAddingHotspot={isAddingHotspot}
               onCanvasReady={(gl) => { rendererRef.current = gl; }} 
               onSceneClick={handleSceneClick}
+              onDeleteHotspot={handleDeleteHotspot}
             />
           </div>
         )}

@@ -20,6 +20,7 @@ interface PanoramaSceneProps {
   isAddingHotspot: boolean;
   onCanvasReady: (gl: THREE.WebGLRenderer) => void;
   onSceneClick: (point: [number, number, number]) => void;
+  onDeleteHotspot: (id: string) => void;
 }
 
 // Inner component to access R3F context and extract the renderer
@@ -76,7 +77,7 @@ function PanoramaSphere({
 }
 
 // Render individual hotspots
-function HotspotMarkers({ hotspots }: { hotspots: Hotspot[] }) {
+function HotspotMarkers({ hotspots, onDeleteHotspot }: { hotspots: Hotspot[], onDeleteHotspot: (id: string) => void }) {
   const [openHotspotId, setOpenHotspotId] = useState<string | null>(null);
 
   return (
@@ -113,6 +114,17 @@ function HotspotMarkers({ hotspots }: { hotspots: Hotspot[] }) {
                 <p className="text-zinc-300 text-xs mt-1 whitespace-pre-wrap max-h-32 overflow-y-auto custom-scrollbar">
                   {hotspot.description}
                 </p>
+                <div className="mt-2 pt-2 border-t border-zinc-700/50 flex justify-end">
+                  <button 
+                    onClick={() => {
+                      onDeleteHotspot(hotspot.id);
+                      setOpenHotspotId(null);
+                    }}
+                    className="text-[10px] text-red-400 hover:text-red-300 uppercase font-bold tracking-wider transition-colors"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -127,7 +139,8 @@ export default function PanoramaScene({
   hotspots,
   isAddingHotspot,
   onCanvasReady,
-  onSceneClick
+  onSceneClick,
+  onDeleteHotspot
 }: PanoramaSceneProps) {
   return (
     <div className="w-full h-full relative">
@@ -148,7 +161,7 @@ export default function PanoramaScene({
           />
         </Suspense>
 
-        <HotspotMarkers hotspots={hotspots} />
+        <HotspotMarkers hotspots={hotspots} onDeleteHotspot={onDeleteHotspot} />
 
         <CanvasReporter onCanvasReady={onCanvasReady} />
 
