@@ -116,9 +116,9 @@ export default function PanoramaViewer() {
   }
 
   return (
-    <main className="flex w-full h-screen bg-zinc-950 overflow-hidden select-none text-zinc-100 font-sans relative">
+    <main className="flex flex-col md:flex-row w-full h-[100dvh] bg-zinc-950 overflow-hidden select-none text-zinc-100 font-sans relative">
       {/* Sidebar */}
-      <aside className="w-80 border-r border-zinc-800 bg-zinc-950/80 backdrop-blur-md flex flex-col z-20">
+      <aside className="w-full md:w-80 h-1/3 md:h-full shrink-0 border-b md:border-b-0 md:border-r border-zinc-800 bg-zinc-950/80 backdrop-blur-md flex flex-col z-20">
         <div className="p-6 border-b border-zinc-800">
           <h2 className="text-lg font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">
             Panoramas
@@ -187,14 +187,14 @@ export default function PanoramaViewer() {
               }`}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-              {isAddingHotspot ? "Click anywhere to add" : "Add Hotspot"}
+              <span className="hidden sm:inline">{isAddingHotspot ? "Click anywhere to add" : "Add Hotspot"}</span>
             </button>
             <button
               onClick={handleDownload}
               className="flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase bg-zinc-900/80 text-zinc-300 border border-zinc-700 hover:bg-zinc-800 hover:text-white rounded-lg transition-all duration-200"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-              Snapshot
+              <span className="hidden sm:inline">Snapshot</span>
             </button>
           </div>
         </header>

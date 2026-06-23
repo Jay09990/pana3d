@@ -168,7 +168,8 @@ export default function PanoramaScene({
         <OrbitControls
           enableZoom={true}
           enablePan={false}
-          autoRotate={false}
+          autoRotate={true}
+          autoRotateSpeed={0.5}
           rotateSpeed={-0.3}
           minDistance={0.1}
           maxDistance={0.1}
